@@ -16,4 +16,19 @@ router.get("", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = `SELECT * FROM movies WHERE id = ?`;
+
+  connection.query(sql, [id], (err, results) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 500, message: "Database query failed" });
+    if (!results.length)
+      return res.status(404).json({ error: 404, message: "item not found" });
+    res.json(results);
+  });
+});
+
 export { router };
