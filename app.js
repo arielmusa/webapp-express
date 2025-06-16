@@ -1,7 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import "./data/db.js";
-import { router } from "./routers/movies.js";
+import { router } from "./routers/moviesRouter.js";
 const app = express();
 
 const { APP_PORT, APP_URI } = process.env;
