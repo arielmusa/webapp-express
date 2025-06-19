@@ -32,4 +32,16 @@ const show = (req, res) => {
   });
 };
 
-export { index, show };
+const storeReview = (req, res) => {
+  const id = req.params.id;
+  const { name, vote, text } = req.body;
+
+  const sql = `INSERT INTO reviews (movie_id, name, vote, text) VALUES (? ,? ,? ,?)`;
+
+  connection.query(sql, [id, name, vote, text], (err, response) => {
+    if (err) return res.status(500).json({ message: "Database query failed" });
+    res.sendStatus(204);
+  });
+};
+
+export { index, show, storeReview };
